@@ -64,10 +64,18 @@ const makeSubArray = () => {
     return subarray;
 }
 
-const moveUp = () => {
+
+const convertSubArray = (data) => {
+  const un = []
+  data.forEach((item) => un.push(...item));
+
+  return un;
+}
+
+const countUp = () => {
   const val = makeSubArray();
 
-  // [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
+  // [[0,0,0,0], [0,0,0,0], ['0', '0', '0', '0'] , ['2', '0', '2', '0']]
   val[3] + val[2]
 
   const aaa = val.reduce((result, current, index)=> {
@@ -95,17 +103,45 @@ const moveUp = () => {
   console.log(aaa, 'up up up');
 }
 
-const moveRight = () => {
+const countRight = () => {
   const arrays = makeSubArray();
-// [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
-  const countedArray = arrays.map((item, index )=> {
-    const aaa = item.reduce((val, el, ind) => {
-      if(el === `${el}` || el === '0') {
+// [['0', '2', '0', '0'], ['0', '0', '0', '0'] , ['0', '0', '0', '0'] , ['2', '0', '0', '0']]     0
+// [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]     0
+// [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]     
+
+
+// [['0', '0', '0', '2'], ['0', '0', '0', '0'] , ['0', '0', '0', '0'] , ['0', '0', '0', '2']]     0
+
+  const counted = arrays.reduce((initArray, subarray) => {
+    console.log(subarray, 'elelelel')
+    const newYYY = []
+    const newCountedArray = subarray.reduceRight((prevVal, curVal, index) => {
+      const prevValNum = Number(prevVal);
+      const curValNaum =  Number(curVal);
+      if(index === 0) {
+        prevValNum === curValNaum;
+        return;
+      }
+      if(prevValNum === curValNaum) {
+        newYYY.push(prevValNum + curValNaum);
+        val = 0;
+      }  else {
+        newYYY.push(prevValNum);
+        newYYY.push(curValNaum);
+      }
+      if(prevValNum === 0) {
         
       }
-    }, [])
-  })
+    }, 0)
+  }, [])
 
+  console.log(counted, 'kdkd');
+
+  const converted = convertSubArray(arrays);
+}
+
+const countLeft = () => {
+  const arrays = makeSubArray(); 
 }
   
 
@@ -114,7 +150,7 @@ function checkKey (e) {
 
   if (e.keyCode == '38') {
     e.preventDefault();
-    moveUp();
+    countUp();
   }
   if (e.keyCode == '40') {
     e.preventDefault();
@@ -122,7 +158,7 @@ function checkKey (e) {
   }
   if (e.keyCode == '39') {
     e.preventDefault();
-    moveRight()
+    countRight()
     console.log('right right right');
   }
   if (e.keyCode == '37') {
