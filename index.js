@@ -10,13 +10,15 @@ let cellArray = [];
 const generate = () => {
   const randomCell =  Math.floor(Math.random() * (cellArray.length));
   const value = cellArray[randomCell].innerHTML;
-  if(value === "0") {
+  if(Number(value) === 0) {
     let cardValue = 2;
     const randomValue = parseInt(Math.random() * 10) + 1;
     if(randomValue > 9) {
       cardValue = 4;
     }
     cellArray[randomCell].innerHTML = cardValue;
+  } else {
+    generate() //рекурсия !
   }
 }
 
@@ -50,7 +52,7 @@ const startGame = (event) => {
 }
 
 
-const count = () => {
+const makeSubArray = () => {
     const initArr = []
     cellArray.forEach(item => {
       initArr.push(item.innerHTML)
@@ -63,7 +65,7 @@ const count = () => {
 }
 
 const moveUp = () => {
-  const val = count();
+  const val = makeSubArray();
 
   // [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
   val[3] + val[2]
@@ -88,13 +90,21 @@ const moveUp = () => {
     console.log(forCount, 'forCount')
     console.log(current, 'current')
     console.log(result, 'result')
-
-    // console.log(index, 'vvvvv')
-    // console.log(current, 'vvvvv')
-    // console.log(prev, 'pppp')
   }, [])
 
   console.log(aaa, 'up up up');
+}
+
+const moveRight = () => {
+  const arrays = makeSubArray();
+// [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
+  const countedArray = arrays.map((item, index )=> {
+    const aaa = item.reduce((val, el, ind) => {
+      if(el === `${el}` || el === '0') {
+        
+      }
+    }, [])
+  })
 
 }
   
@@ -112,6 +122,7 @@ function checkKey (e) {
   }
   if (e.keyCode == '39') {
     e.preventDefault();
+    moveRight()
     console.log('right right right');
   }
   if (e.keyCode == '37') {

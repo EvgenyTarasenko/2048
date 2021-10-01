@@ -83,6 +83,8 @@ p, button {
     font-weight: bold;
     margin: 7.5%;
     background: #cbc1b3;
+    width: 106px;
+    height: 106px;
 }
 
 .score-container__content,
